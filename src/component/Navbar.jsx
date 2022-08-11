@@ -8,17 +8,31 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Register from "../features/Register";
+import LoginForm from "../features/Login";
 
+
+const MODE = {
+  LOGIN: 'login',
+  REGISTER: 'register'
+}
 const Navbar = () => {
   const state = useSelector((state) => state.handleCart)
   const [open, setOpen] = useState(false);
+  const [mode, setMode] = useState('');
 
-  const handleClickOpen = () => {
+  const handleClickOpenLogin = () => {
     setOpen(true);
+    setMode(MODE.LOGIN);
+  };
+
+  const handleClickOpenRegister = () => {
+    setOpen(true);
+    setMode(MODE.REGISTER);
   };
 
   const handleClose = () => {
     setOpen(false);
+    
   };
   return (
     <div>
@@ -62,11 +76,11 @@ const Navbar = () => {
               </li>
             </ul>
             <div className="buttons">
-                <NavLink to="/login" className="btn btn-outline-dark">
-                    <i className="fa fa-sign-in me-1" ></i>Login</NavLink>
-                <NavLink to="/register" className="btn btn-outline-dark ms-2" onClick={handleClickOpen}>
-                    <i className="fa fa-user-plus me-1"  ></i>Register</NavLink>
-                <NavLink to="/cart" className="btn btn-outline-dark ms-2">
+                <Button  className="btn btn-outlined" onClick={handleClickOpenLogin}>
+                    <i className="fa fa-sign-in me-1" ></i>Login</Button>
+                <Button className="btn btn-outlined ms-2" onClick={handleClickOpenRegister}>
+                    <i className="fa fa-user-plus me-1"  ></i>Register</Button>
+                <NavLink to="/cart" className="btn btn-outline-dark ms-2 ">
                     <i className="fa fa-shopping-cart me-1" ></i>cart ({state.length})</NavLink>
             </div>
           </div>
@@ -79,7 +93,16 @@ const Navbar = () => {
       >
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            <Register/>
+            {mode === MODE.LOGIN && (
+              <>
+                <LoginForm/>
+              </>
+            )}
+               {mode === MODE.REGISTER && (
+              <>
+                <Register/>
+              </>
+            )}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
