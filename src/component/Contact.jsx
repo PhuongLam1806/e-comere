@@ -53,7 +53,7 @@ const Contact = () => {
                     rows="5"
                   ></textarea>
                 </div>
-                <button type="submit" class="btn btn-ouline-primary">Submit</button>
+                <button type="submit" className="btn btn-outline-dark px-3">Submit</button>
               </form>
             </div>
           </div>
