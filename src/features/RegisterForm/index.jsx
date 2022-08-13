@@ -10,6 +10,7 @@ import { Avatar, Button, TextField, Typography } from "@mui/material";
 import "./styles.css";
 import PasswordField from "../../form-control/PasswordField";
 import InputField from "../../form-control/InputField";
+import {useState} from 'react' 
 
 RegisterForm.propTypes = {
   onSubmit: PropTypes.func,
@@ -43,13 +44,17 @@ function RegisterForm(props) {
     resolver: yupResolver(schema),
   });
 
+
   const handleSubmit = (values) => {
     console.log("Todo Form: ", values);
     const { onSubmit } = props;
     if (onSubmit) onSubmit(values);
 
-    form.reset();
+      document.getElementById("myForm").reset();
+      // form.reset()
+    
   };
+
 
   return (
     <div className="form">
@@ -58,7 +63,7 @@ function RegisterForm(props) {
       <Typography component="h3" variant="h5" className="form__title">
         Create Account
       </Typography>
-      <form onSubmit={form.handleSubmit(handleSubmit)}>
+      <form id="myForm" onSubmit={form.handleSubmit(handleSubmit)}>
         <InputField name="fullName" label="Full Name" form={form} />
         <InputField name="email" label="Email" form={form} />
         <PasswordField name="password" label="Password" form={form} />
