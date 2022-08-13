@@ -8,7 +8,8 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Register from "../features/Register";
-import LoginForm from "../features/Login";
+import LoginForm from "../features/LoginForm";
+
 
 
 const MODE = {
@@ -34,6 +35,14 @@ const Navbar = () => {
     setOpen(false);
     
   };
+
+ 
+
+  // const handleBackdropClick = () => {
+  //   //these fail to keep the modal open
+  //   event.stopPropagation();
+  //   return false;
+  // };
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-white py-3 shadow-sm">
@@ -88,6 +97,8 @@ const Navbar = () => {
       </nav>
 
       <Dialog
+        onBackdropClick
+        disableEscapeKeyDown
         open={open}
         onClose={handleClose}
       >

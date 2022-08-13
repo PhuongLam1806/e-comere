@@ -18,7 +18,16 @@ function LoginForm(props) {
 
     // const classes = useStyles()
 
-    const schema = yup.object().required()
+    const schema = yup
+      .object({
+        email: yup
+          .string()
+          .required("please enter your email"),
+        password: yup
+          .string()
+          .required("please enter your password")
+      })
+      .required();
    
     const form  = useForm({
         defaultValues: {
@@ -45,12 +54,14 @@ function LoginForm(props) {
         </Avatar>
 
         <Typography component="h3" variant="h5" className="form__title">
-            Create Account
+            Login
         </Typography>
         <form onSubmit={form.handleSubmit(handleSubmit)}>
 
-          <InputField name="email" label="Email" form={form} />
+          <InputField name="email" label="Email" form={form}/>
+          {/* <InputField name="email" label="Email" form={form} /> */}
           <PasswordField name="password" label="Password" form={form} />
+          {/* <PasswordField name="retypePassword" label="Retype password" form={form} /> */}
 
           <Button type="submit" variant="contained" color="primary" className="form__btn" style={{marginTop: 20}}>
             Login

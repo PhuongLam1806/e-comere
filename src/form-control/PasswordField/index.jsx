@@ -32,7 +32,7 @@ function PasswordField(props) {
     const {form, name, label, disabled} = props;
     // const {error, formState} = form
     const { formState:{ errors } } = form
-    const hasError = errors[name]
+    const hasError = !!errors[name]
     //   });
 
     const [showPassword, setShowPassword] = useState(false)
@@ -43,45 +43,13 @@ function PasswordField(props) {
 
     return (
         <div>
-{/*             
-        <Controller
-            control={form.control}
-            name={name}
-            render={({field: {onChange, onBlur, value}}) =>(
-                <TextField
-                id="outlined-password-input"
-                label="Password"
-                type="password"
-                autoComplete="current-password"
-              />
-
-            )}
-        /> */}
-        {/* <FormControl margin='normal' fullWidth>
-        <InputLabel htmlFor="standard-adornment-password">{label}</InputLabel>
-        <Input
-          id="standard-adornment-password"
-          type={showPassword ? 'text' : 'password'}
-          endAdornment={
-            <InputAdornment position="end">
-              <IconButton
-                aria-label="toggle password visibility"
-                onClick={toggleShowPassword}
-                
-              >
-                {showPassword ? <VisibilityOff /> : <Visibility />}
-              </IconButton>
-            </InputAdornment>
-          }
-        />
-      </FormControl> */}
 
       <Controller
             control={form.control}
             name={name}
             render={({field: {onChange, onBlur, value}}) =>(
 
-      <FormControl margin='normal' fullWidth variant="outlined">
+      <FormControl error={hasError} margin='normal' fullWidth variant="outlined">
           <InputLabel htmlFor={name}>{label}</InputLabel>
           <OutlinedInput
             disableEscapeKeyDown
@@ -92,8 +60,8 @@ function PasswordField(props) {
             label={label}
             name={name}
             disabled={disabled}
-            error={!!hasError}
-            helperText={errors[name]?.message}
+            // error={!!hasError}
+            // helperText={errors[name]?.message}
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
@@ -105,6 +73,7 @@ function PasswordField(props) {
               </InputAdornment>
             }
           />
+          <FormHelperText >{errors[name]?.message}</FormHelperText>
         </FormControl>
             )}
         />
